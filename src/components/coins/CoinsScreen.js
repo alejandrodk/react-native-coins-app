@@ -9,6 +9,10 @@ import Colors from '../../resources/colors';
 const CoinsScreen = props => {
   const [coins, setCoins] = useState(null);
 
+  const handlePress = coin => {
+    props.navigation.navigate('CoinDetail', {coin});
+  };
+
   useEffect(() => {
     if (!coins) {
       (async function () {
@@ -26,7 +30,9 @@ const CoinsScreen = props => {
       {coins ? (
         <FlatList
           data={coins || []}
-          renderItem={({item}) => <CoinItem item={item} />}
+          renderItem={({item}) => (
+            <CoinItem onPress={() => handlePress(item)} item={item} />
+          )}
         />
       ) : (
         <ActivityIndicator style={styles.loader} color="#459acd" size="large" />
@@ -45,7 +51,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   loader: {
-    marginTop: "60%",
+    marginTop: '60%',
   },
 });
 
