@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, Text, StyleSheet} from 'react-native';
+import {View, FlatList, ActivityIndicator, StyleSheet} from 'react-native';
 import {API, HttpMethods} from '../../libs/constants';
 import Http from '../../libs/http';
 
@@ -26,10 +26,14 @@ const CoinsScreen = props => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={coins || []}
-        renderItem={({item}) => <CoinItem item={item} />}
-      />
+      {coins ? (
+        <FlatList
+          data={coins || []}
+          renderItem={({item}) => <CoinItem item={item} />}
+        />
+      ) : (
+        <ActivityIndicator style={styles.loader} color="#459acd" size="large" />
+      )}
     </View>
   );
 };
@@ -48,6 +52,9 @@ const styles = StyleSheet.create({
   btnText: {
     color: '#FFF',
     textAlign: 'center',
+  },
+  loader: {
+    marginTop: "60%",
   },
 });
 
