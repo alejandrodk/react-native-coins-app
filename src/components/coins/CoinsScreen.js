@@ -1,9 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Pressable, StyleSheet} from 'react-native';
+import Http from '../../libs/http';
 
 const CoinsScreen = props => {
+  const [coins, setCoins] = useState(null);
+
+  useEffect(() => {
+    if (!coins) {
+      (async function () {
+        const data = await Http.instance.HttpRequest({
+          url: 'https://api.coinlore.net/api/tickers/',
+          method: 'get',
+        });
+        if (data) setCoins(data);
+      })();
+    }
+  }, [coins]);
+
   const handlePress = () => {
-    props.navigation.navigate("CoinDetail")
+    props.navigation.navigate('CoinDetail');
   };
 
   return (
