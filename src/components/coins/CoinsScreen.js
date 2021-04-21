@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Pressable, StyleSheet} from 'react-native';
+import {View, FlatList, Text, StyleSheet} from 'react-native';
 import {API, HttpMethods} from '../../libs/constants';
 import Http from '../../libs/http';
+
+import CoinItem from './CoinItem';
 
 const CoinsScreen = props => {
   const [coins, setCoins] = useState(null);
@@ -24,10 +26,10 @@ const CoinsScreen = props => {
 
   return (
     <View style={styles.container}>
-      <Text>Coins Screen 🚀</Text>
-      <Pressable style={styles.btn} onPress={handlePress}>
-        <Text style={styles.btnText}>Detail</Text>
-      </Pressable>
+      <FlatList
+        data={coins || []}
+        renderItem={({item}) => <CoinItem item={item} />}
+      />
     </View>
   );
 };
