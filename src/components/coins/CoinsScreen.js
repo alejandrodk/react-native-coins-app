@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, Pressable, StyleSheet} from 'react-native';
+import {API, HttpMethods} from '../../libs/constants';
 import Http from '../../libs/http';
 
 const CoinsScreen = props => {
@@ -9,8 +10,8 @@ const CoinsScreen = props => {
     if (!coins) {
       (async function () {
         const data = await Http.instance.HttpRequest({
-          url: 'https://api.coinlore.net/api/tickers/',
-          method: 'get',
+          url: API.CURRENCIES,
+          method: HttpMethods.GET,
         });
         if (data) setCoins(data);
       })();
