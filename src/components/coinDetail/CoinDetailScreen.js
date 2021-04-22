@@ -6,6 +6,7 @@ import {
   StyleSheet,
   SectionList,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 
 import Colors from '../../resources/colors';
@@ -80,14 +81,20 @@ const CoinDetailScreen = ({route, navigation}) => {
           </View>
         )}
       />
-      <Text style={styles.marketsTitle}>Markets</Text>
-      <FlatList
-        style={styles.list}
-        keyExtractor={(item) => `${item.base}-${item.name}-${item.quote}`}
-        horizontal={true}
-        data={market}
-        renderItem={({item}) => <CoinMarketItem item={item} />}
-      />
+      {market ? (
+        <React.Fragment>
+          <Text style={styles.marketsTitle}>Markets</Text>
+          <FlatList
+            style={styles.list}
+            keyExtractor={item => `${item.base}-${item.name}-${item.quote}`}
+            horizontal={true}
+            data={market}
+            renderItem={({item}) => <CoinMarketItem item={item} />}
+          />
+        </React.Fragment>
+      ) : (
+        <ActivityIndicator style={styles.loader} color="#FFF" size="large" />
+      )}
     </View>
   );
 };
@@ -140,6 +147,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     marginLeft: 16,
     fontWeight: 'bold',
+  },
+  loader: {
+    marginTop: '20%',
   },
 });
 
