@@ -16,7 +16,7 @@ export default class Http {
         ...options,
       });
 
-      return data.data;
+      return data;
     } catch (error) {
       console.error('[Error] HttpRequest: ', error);
       throw new Error(error);

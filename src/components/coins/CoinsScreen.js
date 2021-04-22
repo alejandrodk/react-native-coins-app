@@ -20,7 +20,7 @@ const CoinsScreen = props => {
           url: API.CURRENCIES,
           method: HttpMethods.GET,
         });
-        if (data) setCoins(data);
+        if (data) setCoins(data.data);
       })();
     }
   }, [coins]);
