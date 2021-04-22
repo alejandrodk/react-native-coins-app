@@ -11,7 +11,7 @@ import {
 
 import Colors from '../../resources/colors';
 import Http from '../../libs/http';
-import {HttpMethods, API} from '../../libs/constants';
+import {API} from '../../libs/constants';
 
 import CoinMarketItem from './CoinMarketItem';
 
