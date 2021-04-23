@@ -8,6 +8,7 @@ import {
   FlatList,
   ActivityIndicator,
   Pressable,
+  Alert,
 } from 'react-native';
 
 import Colors from '../../resources/colors';
@@ -76,8 +77,21 @@ const CoinDetailScreen = ({route, navigation}) => {
       const result = await Storage.instance.store(key, coin);
       result && setFavorite(true);
     } else {
-      await Storage.instance.remove(key);
-      setFavorite(false);
+      Alert.alert('Remove favorite', `Remove ${coin.name} from favorites?`, [
+        {
+          text: 'cancel',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'remove',
+          onPress: async () => {
+            await Storage.instance.remove(key);
+            setFavorite(false);
+          },
+          style: 'destructive',
+        },
+      ]);
     }
   };
 
