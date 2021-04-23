@@ -28,7 +28,8 @@ class Storage {
     try {
       const keys = await AsyncStorage.getAllKeys();
       const data = await AsyncStorage.multiGet(keys);
-      console.log(data);
+  
+      return data.map(([key, value]) => JSON.parse(value));
     } catch (error) {
       console.error(error);
       throw new Error(error);

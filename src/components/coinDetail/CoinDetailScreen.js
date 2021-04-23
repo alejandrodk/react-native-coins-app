@@ -26,7 +26,7 @@ const CoinDetailScreen = ({route, navigation}) => {
   navigation.setOptions({title: coin.symbol});
 
   useEffect(() => {
-    if (!market) {
+    if (!market && coin) {
       const getMarkets = async () => {
         const markets = await Http.instance.HttpRequest({
           url: API.COIN_MARKET,
