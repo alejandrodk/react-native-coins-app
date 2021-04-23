@@ -16,7 +16,8 @@ class Storage {
 
   get = async key => {
     try {
-      return await AsyncStorage.getItem(key);
+      const data = await AsyncStorage.getItem(key);
+      return JSON.parse(data);
     } catch (error) {
       console.error(error);
       throw new Error(error);
@@ -26,7 +27,8 @@ class Storage {
   getAll = async () => {
     try {
       const keys = await AsyncStorage.getAllKeys();
-      return await AsyncStorage.multiGet(keys);
+      const data = await AsyncStorage.multiGet(keys);
+      console.log(data);
     } catch (error) {
       console.error(error);
       throw new Error(error);
